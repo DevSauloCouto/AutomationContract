@@ -8,7 +8,7 @@ public class PaypalServiceTest {
 
     @Test
     @DisplayName("should return value parcel with simple interest")
-    public void valueParcelsInterest() {
+    public void valueParcelInterest() {
         IPaymentService paypalService = new PaypalService();
 
         Assertions.assertEquals(202, paypalService.interestMonthly(200.00, 1));
@@ -17,7 +17,7 @@ public class PaypalServiceTest {
     }
 
     @Test
-    @DisplayName("should return value with tax payment")
+    @DisplayName("should return value with rate payment")
     public void valueRatePayment() {
         IPaymentService paymentService = new PaypalService();
 
