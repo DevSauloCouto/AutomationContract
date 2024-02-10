@@ -3,10 +3,6 @@ package com.system.enterprise.services;
 import com.system.enterprise.entities.Contract;
 import com.system.enterprise.entities.Installment;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 public class ContractService {
 
     public void processContract(Contract contract, Integer numberOfInstallment) {
@@ -14,10 +10,17 @@ public class ContractService {
 
         Double valueParcel = contract.getValue() / numberOfInstallment;
 
-        for (int i = 0; i < numberOfInstallment; i++) {
-            Double interest = paypalService.interest(valueParcel, i + 1);
+        if (numberOfInstallment == 1) {
+            Double payment = paypalService.paymentFee(valueParcel);
 
-            contract.addInstallment(new Installment(contract.getDate().plusMonths(i + 1), paypalService.paymentFee(interest)));
+            contract.addInstallment(new Installment(contract.getDate().plusMonths(1), payment));
+        } else {
+            for (int i = 0; i < numberOfInstallment; i++) {
+                Double interest = paypalService.interestMonthly(valueParcel, i + 1);
+
+                contract.addInstallment(new Installment(contract.getDate().plusMonths(i + 1), paypalService.paymentFee(interest)));
+            }
+
         }
     }
 
