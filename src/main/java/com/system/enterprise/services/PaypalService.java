@@ -8,7 +8,7 @@ public class PaypalService implements IPaymentService {
     }
 
     @Override
-    public Double interest(Double value, Integer months) {
+    public Double interestMonthly(Double value, Integer months) {
         return value + (value * 0.01) * months;
     }
 
