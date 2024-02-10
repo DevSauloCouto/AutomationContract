@@ -39,4 +39,17 @@ public class ContractServiceTest {
         Assertions.assertEquals(624.24, contractService.getValueTotal(contract));
     }
 
+    @Test
+    @DisplayName("should return a installment only with payment fee")
+    public void oneInstallmentContract() {
+        ContractService contractService = new ContractService();
+        Contract contract = new Contract(1L, LocalDate.now(), 200.00);
+        Integer uniqueInstallment = 1;
+
+        contractService.processContract(contract, uniqueInstallment);
+
+        Assertions.assertEquals(204.0, contract.getInstallments().get(0).getValue());
+    }
+
+
 }

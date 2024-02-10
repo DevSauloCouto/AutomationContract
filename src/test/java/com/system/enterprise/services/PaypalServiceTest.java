@@ -11,9 +11,9 @@ public class PaypalServiceTest {
     public void valueParcelsInterest() {
         IPaymentService paypalService = new PaypalService();
 
-        Assertions.assertEquals(202, paypalService.interest(200.00, 1));
-        Assertions.assertEquals(204, paypalService.interest(200.00, 2));
-        Assertions.assertEquals(206, paypalService.interest(200.00, 3));
+        Assertions.assertEquals(202, paypalService.interestMonthly(200.00, 1));
+        Assertions.assertEquals(204, paypalService.interestMonthly(200.00, 2));
+        Assertions.assertEquals(206, paypalService.interestMonthly(200.00, 3));
     }
 
     @Test
@@ -21,9 +21,9 @@ public class PaypalServiceTest {
     public void valueRatePayment() {
         IPaymentService paymentService = new PaypalService();
 
-        Double firstParcel = paymentService.interest(200.00, 1);
-        Double secondParcel = paymentService.interest(200.00, 2);
-        Double thirdParcel = paymentService.interest(200.00, 3);
+        Double firstParcel = paymentService.interestMonthly(200.00, 1);
+        Double secondParcel = paymentService.interestMonthly(200.00, 2);
+        Double thirdParcel = paymentService.interestMonthly(200.00, 3);
 
         Assertions.assertEquals(206.04, paymentService.paymentFee(firstParcel));
         Assertions.assertEquals(208.08, paymentService.paymentFee(secondParcel));
