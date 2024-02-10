@@ -1,6 +1,7 @@
 package com.system.enterprise.application;
 
 import com.system.enterprise.entities.Contract;
+import com.system.enterprise.entities.Installment;
 import com.system.enterprise.services.ContractService;
 
 import java.time.LocalDate;
@@ -26,17 +27,19 @@ public class Program {
         Double value = scanner.nextDouble();
 
         System.out.print("Número de parcelas: ");
-        Integer parcels = scanner.nextInt();
+        Integer numberOfInstallments = scanner.nextInt();
 
         Contract contract = new Contract(number, date, value);
 
         ContractService contractService = new ContractService();
+        contractService.processContract(contract, numberOfInstallments);
 
-        System.out.println("-----------------------------");
-//        System.out.println("PARCELAS:");
-//        for (String parcel : contractService.processContract(contract)) {
-//            System.out.println(parcel);
-//        }
+        System.out.println("----------------");
+        System.out.println("PARCELAS:");
+        for (Installment installment : contract.getInstallments()) {
+            System.out.println(installment);
+        }
+
     }
 
 }
