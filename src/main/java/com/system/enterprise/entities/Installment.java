@@ -1,6 +1,8 @@
 package com.system.enterprise.entities;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Installment {
 
@@ -22,6 +24,6 @@ public class Installment {
 
     @Override
     public String toString() {
-        return value.toString();
+        return String.format(Locale.US, "%s - %.2f", dueDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), value);
     }
 }
