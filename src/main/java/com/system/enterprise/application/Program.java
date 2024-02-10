@@ -3,6 +3,7 @@ package com.system.enterprise.application;
 import com.system.enterprise.entities.Contract;
 import com.system.enterprise.entities.Installment;
 import com.system.enterprise.services.ContractService;
+import com.system.enterprise.services.PaypalService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -31,7 +32,7 @@ public class Program {
 
         Contract contract = new Contract(number, date, value);
 
-        ContractService contractService = new ContractService();
+        ContractService contractService = new ContractService(new PaypalService());
         contractService.processContract(contract, numberOfInstallments);
 
         System.out.println("----------------");
